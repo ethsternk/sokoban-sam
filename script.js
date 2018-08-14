@@ -63,7 +63,7 @@ for (let rowIndex in map) {
     }
 }
 
-console.log(grid)
+console.table(grid)
 
 
 document.addEventListener('keydown', (event) => {
@@ -103,18 +103,52 @@ document.addEventListener('keydown', (event) => {
 
     if (targetCell) {
 
+        // if NO wall
         if (targetCell.className.indexOf("wall") === -1) {
+            // if NO crate
             if (targetCell.className.indexOf("crate") === -1) {
-                targetCell.appendChild(player)
+                // if NO fruit
+                if (targetCell.className.indexOf("fullStorage") === -1) {
+                    // move player
+                    targetCell.appendChild(player)
+                    // if fruit
+                } else {
+                    // if2 NOT wall/crate/fruit
+                    if (targetCell2.className.indexOf("wall") === -1 &&
+                        targetCell2.className.indexOf("crate") === -1 &&
+                        targetCell2.className.indexOf("fullStorage") === -1) {
+                        // if2 NOT fruit
+                        if (targetCell2.className.indexOf("emptyStorage") === -1) {
+                            // move player crate
+                            targetCell.appendChild(player)
+                            targetCell.classList.remove("fullStorage");
+                            targetCell.classList.add("emptyStorage");
+                            targetCell2.classList.add("crate");
+                        // if2 fruit
+                        } else {
+                            // move player fruit
+                            targetCell.appendChild(player)
+                            targetCell.classList.remove("fullStorage");
+                            targetCell.classList.add("emptyStorage");
+                            targetCell2.classList.add("fullStorage");
+                        }
+                    }
+                }
+                // if crate
             } else {
+                // if2 NOT wall/crate/fruit
                 if (targetCell2.className.indexOf("wall") === -1 &&
                     targetCell2.className.indexOf("crate") === -1 &&
                     targetCell2.className.indexOf("fullStorage") === -1) {
+                    // if2 NOT fruit
                     if (targetCell2.className.indexOf("emptyStorage") === -1) {
+                        // move player crate
                         targetCell.appendChild(player)
                         targetCell.classList.remove("crate");
                         targetCell2.classList.add("crate");
+                        // if2 fruit
                     } else {
+                        // move player fruit
                         targetCell.appendChild(player)
                         targetCell.classList.remove("crate");
                         targetCell2.classList.add("fullStorage");
@@ -123,9 +157,18 @@ document.addEventListener('keydown', (event) => {
             }
         }
 
-        if (targetCell.className.indexOf("finish") !== -1) {
-            console.log("finish")
-            alert("You win!!");
+        boxCount = 0;
+        for (let y = 0; y < grid.length - 1; y++) {
+            for (let x = 0; x < grid[y].length; x++) {
+                let cell = grid[x][y];
+                if (cell.className.indexOf("crate") !== -1) {
+                    boxCount++;
+                }
+            }
+        }
+        console.log("boxCount: ", boxCount)
+        if (boxCount === 0) {
+            alert("YOU WIN");
         }
     }
 

@@ -103,17 +103,21 @@ document.addEventListener('keydown', (event) => {
 
     if (targetCell) {
 
-        if (targetCell.className.indexOf("wall") === -1) {
         // if a wall is NOT in the way
-            if (targetCell.className.indexOf("crate") === -1) {
+        if (targetCell.className.indexOf("wall") === -1) {
             // if a box is NOT in the way
-                targetCell.appendChild(player)
+            if (targetCell.className.indexOf("crate") === -1) {
                 // move player
-            } else {
-            // if a box IS in the way
                 targetCell.appendChild(player)
-                targetCell.classList.remove("crate");
-                targetCell2.classList.add("crate");
+            // if a box IS in the way
+            } else {
+                // if a wall and box is NOT in the way of the box
+                if (targetCell2.className.indexOf("wall") === -1 && targetCell2.className.indexOf("crate") === -1) {
+                    // move player and box
+                    targetCell.appendChild(player)
+                    targetCell.classList.remove("crate");
+                    targetCell2.classList.add("crate");
+                }
             }
         }
 

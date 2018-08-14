@@ -83,10 +83,10 @@ document.addEventListener('keydown', (event) => {
 
     } else if (event.key === "ArrowUp") {
         console.log("up")
-        
+
         targetCell = grid[currentRowIndex - 1][currentCellIndex]
         targetCell2 = grid[currentRowIndex - 2][currentCellIndex]
-        
+
     } else if (event.key === "ArrowDown") {
         console.log("down")
 
@@ -103,20 +103,22 @@ document.addEventListener('keydown', (event) => {
 
     if (targetCell) {
 
-        // if a wall is NOT in the way
         if (targetCell.className.indexOf("wall") === -1) {
-            // if a box is NOT in the way
             if (targetCell.className.indexOf("crate") === -1) {
-                // move player
                 targetCell.appendChild(player)
-            // if a box IS in the way
             } else {
-                // if a wall and box is NOT in the way of the box
-                if (targetCell2.className.indexOf("wall") === -1 && targetCell2.className.indexOf("crate") === -1) {
-                    // move player and box
-                    targetCell.appendChild(player)
-                    targetCell.classList.remove("crate");
-                    targetCell2.classList.add("crate");
+                if (targetCell2.className.indexOf("wall") === -1 &&
+                    targetCell2.className.indexOf("crate") === -1 &&
+                    targetCell2.className.indexOf("fullStorage") === -1) {
+                    if (targetCell2.className.indexOf("emptyStorage") === -1) {
+                        targetCell.appendChild(player)
+                        targetCell.classList.remove("crate");
+                        targetCell2.classList.add("crate");
+                    } else {
+                        targetCell.appendChild(player)
+                        targetCell.classList.remove("crate");
+                        targetCell2.classList.add("fullStorage");
+                    }
                 }
             }
         }

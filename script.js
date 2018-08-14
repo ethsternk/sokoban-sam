@@ -79,28 +79,42 @@ document.addEventListener('keydown', (event) => {
         console.log("right")
 
         targetCell = grid[currentRowIndex][currentCellIndex + 1]
+        targetCell2 = grid[currentRowIndex][currentCellIndex + 2]
 
     } else if (event.key === "ArrowUp") {
         console.log("up")
-
+        
         targetCell = grid[currentRowIndex - 1][currentCellIndex]
-
+        targetCell2 = grid[currentRowIndex - 2][currentCellIndex]
+        
     } else if (event.key === "ArrowDown") {
         console.log("down")
 
         targetCell = grid[currentRowIndex + 1][currentCellIndex]
+        targetCell2 = grid[currentRowIndex + 2][currentCellIndex]
 
     } else if (event.key === "ArrowLeft") {
         console.log("left")
 
         targetCell = grid[currentRowIndex][currentCellIndex - 1]
+        targetCell2 = grid[currentRowIndex][currentCellIndex - 2]
 
     }
 
     if (targetCell) {
 
         if (targetCell.className.indexOf("wall") === -1) {
-            targetCell.appendChild(player)
+        // if a wall is NOT in the way
+            if (targetCell.className.indexOf("crate") === -1) {
+            // if a box is NOT in the way
+                targetCell.appendChild(player)
+                // move player
+            } else {
+            // if a box IS in the way
+                targetCell.appendChild(player)
+                targetCell.classList.remove("crate");
+                targetCell2.classList.add("crate");
+            }
         }
 
         if (targetCell.className.indexOf("finish") !== -1) {

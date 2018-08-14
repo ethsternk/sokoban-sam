@@ -1,0 +1,58 @@
+/* all elements have no padding or margin by default */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.cell {
+    box-sizing: border-box;
+    width: 40px; 
+    height: 40px; 
+    margin: 0px; 
+    background-color: rgba(0, 0, 0, 0); 
+}
+
+main {
+    /* display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;  */
+    margin: 0;
+}
+
+.row {
+    display: flex; 
+    flex-direction: row; 
+}
+
+.wall {
+    background-color: black;
+}
+
+.emptyStorage {
+    background-image: url("https://i.kym-cdn.com/photos/images/original/001/261/108/18c.gif");
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#player {
+    position: absolute;
+    box-sizing: border-box; 
+    width: 40px;
+    height: 40px;
+}
+
+.crate {
+    background-image: url("https://vignette.wikia.nocookie.net/crashban/images/e/ed/Crash_Bandicoot_2_Cortex_Strikes_Back_%3F_Crate.png/revision/latest?cb=20161002234750");
+    background-size: 40px 40px;
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+
+.fullStorage {
+    background-image: url("https://vignette.wikia.nocookie.net/crashban/images/9/97/Crash_Bandicoot_The_Wrath_of_Cortex_Wumpa_Fruit.png/revision/latest?cb=20160925002910");
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: center; 
+}
